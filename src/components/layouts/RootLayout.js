@@ -1,11 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router";
+import { ProLayout } from "@ant-design/pro-layout";
 
 const RootLayout = () => {
   return (
     <div>
-      RootLayout
-      <Outlet />
+      <ProLayout>
+        <Outlet />
+      </ProLayout>
     </div>
   );
 };
