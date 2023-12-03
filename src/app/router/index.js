@@ -6,6 +6,7 @@ import {
 import { AuthLayout, RootLayout } from "../../components";
 import {
   Bookmarks,
+  Error,
   Feed,
   Likes,
   Posts,
@@ -18,7 +19,7 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<RootLayout />}>
-        <Route path="feed" element={<Feed />} />
+        <Route index element={<Feed />} />
         <Route path="likes" element={<Likes />} />
         <Route path="bookmarks" element={<Bookmarks />} />
         <Route path="posts" element={<Posts />} />
@@ -28,6 +29,7 @@ export const router = createBrowserRouter(
         <Route index element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
       </Route>
+      <Route path="*" element={<Error />} />
     </Route>
   )
 );
