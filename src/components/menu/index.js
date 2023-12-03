@@ -1,12 +1,12 @@
 import React from "react";
-
 import {
   FileImageOutlined,
   HeartOutlined,
   HomeOutlined,
   SaveOutlined,
   UserOutlined,
-} from "@ant-design/icons";
+} from "../../assets/icons";
+
 const menuItems = {
   route: {
     path: "/",
