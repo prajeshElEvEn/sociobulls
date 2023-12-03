@@ -1,7 +1,8 @@
+import { PageContainer } from "@ant-design/pro-layout";
 import React from "react";
 
 const Likes = () => {
-  return <div>Likes</div>;
+  return <PageContainer>hi</PageContainer>;
 };
 
 export default Likes;

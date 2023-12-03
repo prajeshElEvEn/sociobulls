@@ -1,6 +1,12 @@
 import React from "react";
 
-import { SmileFilled } from "@ant-design/icons";
+import {
+  FileImageOutlined,
+  HeartOutlined,
+  HomeOutlined,
+  SaveOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 const menuItems = {
   route: {
     path: "/",
@@ -8,27 +14,27 @@ const menuItems = {
       {
         path: "/",
         name: "Feed",
-        icon: <SmileFilled />,
+        icon: <HomeOutlined />,
       },
       {
         path: "/likes",
         name: "My Likes",
-        icon: <SmileFilled />,
+        icon: <HeartOutlined />,
       },
       {
         path: "/bookmarks",
         name: "My Bookmarks",
-        icon: <SmileFilled />,
+        icon: <SaveOutlined />,
       },
       {
         path: "/posts",
         name: "My Posts",
-        icon: <SmileFilled />,
+        icon: <FileImageOutlined />,
       },
       {
         path: "/profile",
         name: "My Profile",
-        icon: <SmileFilled />,
+        icon: <UserOutlined />,
       },
     ],
   },
