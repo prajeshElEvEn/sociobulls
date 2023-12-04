@@ -13,7 +13,7 @@ const items = [
   },
 ];
 
-const CardOption = ({ icon, count, user }) => {
+const CardOption = ({ icon, user }) => {
   return (
     <div
       style={{
@@ -24,12 +24,6 @@ const CardOption = ({ icon, count, user }) => {
         gap: 2,
       }}
     >
-      {count && (
-        <>
-          {icon}
-          <div className="option-name">{count}</div>
-        </>
-      )}
       {user && (
         <Dropdown menu={{ items }} trigger={["click"]}>
           <Link onClick={(e) => e.preventDefault()}>
