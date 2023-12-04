@@ -6,6 +6,8 @@ import CommentCard from "./cards/CommentCard";
 import PostCard from "./cards/PostCard";
 import CommentForm from "./forms/CommentForm";
 import PostForm from "./forms/PostForm";
+import ProfileCard from "./cards/ProfileCard";
+import ProfileForm from "./forms/ProfileForm";
 
 export {
   AuthLayout,
@@ -16,4 +18,6 @@ export {
   PostCard,
   PostForm,
   CommentForm,
+  ProfileCard,
+  ProfileForm,
 };

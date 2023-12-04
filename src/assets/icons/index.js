@@ -7,6 +7,9 @@ import {
   EllipsisOutlined,
   EditOutlined,
   CommentOutlined,
+  UploadOutlined,
+  MailOutlined,
+  KeyOutlined,
 } from "@ant-design/icons";
 
 export {
@@ -18,4 +21,7 @@ export {
   HomeOutlined,
   SaveOutlined,
   CommentOutlined,
+  UploadOutlined,
+  MailOutlined,
+  KeyOutlined,
 };

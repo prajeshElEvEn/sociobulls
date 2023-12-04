@@ -1,12 +1,13 @@
 import { Button, Form, Input, Space } from "antd";
 import React from "react";
 
-const PostForm = () => {
+const PostForm = ({ handleCancel }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log(values);
     form.resetFields();
+    handleCancel();
   };
 
   return (

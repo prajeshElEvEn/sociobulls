@@ -4,12 +4,15 @@ import { Button, Modal } from "antd";
 import { PostCard, PostForm } from "../../components";
 const Feed = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <PageContainer
       extra={[
@@ -28,12 +31,11 @@ const Feed = () => {
       <Modal
         title="Create Post"
         open={isModalOpen}
-        // onOk={handleOk}
         onCancel={handleCancel}
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <PostForm />
+        <PostForm handleCancel={handleCancel} />
       </Modal>
     </PageContainer>
   );
