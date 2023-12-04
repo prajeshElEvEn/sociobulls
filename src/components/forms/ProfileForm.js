@@ -19,6 +19,7 @@ const ProfileForm = ({ handleCancel }) => {
   };
   return (
     <Form
+      layout="vertical"
       form={form}
       name="edit-profile"
       onFinish={onFinish}

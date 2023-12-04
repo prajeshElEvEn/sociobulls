@@ -12,6 +12,7 @@ const PostForm = ({ handleCancel }) => {
 
   return (
     <Form
+      layout="vertical"
       form={form}
       name="create-post"
       onFinish={onFinish}
