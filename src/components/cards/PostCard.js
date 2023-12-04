@@ -5,14 +5,20 @@ import { Comment, Icon } from "@ant-design/compatible";
 import CardOption from "./CardOption";
 import { EllipsisOutlined } from "../../assets/icons";
 import moment from "moment";
+import CommentLayout from "../layouts/CommentLayout";
 
-const PostCard = () => {
+const PostCard = ({ user, children }) => {
   const [actionLike, setActionLike] = useState("unliked");
   const [likes, setLikes] = useState(0);
   const [actionBookmark, setActionBookmark] = useState("unbookmarked");
   const [bookmarks, setBookmarks] = useState(0);
   const [actionComment, setActionComment] = useState("uncommented");
   const [comments, setComments] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const handleLike = () => {
     const newAction = actionLike === "liked" ? "unliked" : "liked";
@@ -30,12 +36,13 @@ const PostCard = () => {
     );
   };
   const handleComment = () => {
-    const newAction =
-      actionComment === "commented" ? "uncommented" : "commented";
-    setActionComment(newAction);
-    setComments((prevComments) =>
-      newAction === "commented" ? prevComments + 1 : prevComments - 1
-    );
+    setOpen(true);
+    // const newAction =
+    //   actionComment === "commented" ? "uncommented" : "commented";
+    // setActionComment(newAction);
+    // setComments((prevComments) =>
+    //   newAction === "commented" ? prevComments + 1 : prevComments - 1
+    // );
   };
 
   const actions = [
@@ -76,7 +83,7 @@ const PostCard = () => {
     <ProCard bordered>
       <Comment
         actions={actions}
-        author={"Han Solo"}
+        author={user}
         avatar={
           <Avatar
             src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -91,7 +98,10 @@ const PostCard = () => {
             <span>{moment().fromNow()}</span>
           </Tooltip>
         }
-      />
+      >
+        {children}
+      </Comment>
+      <CommentLayout onClose={onClose} open={open} />
     </ProCard>
   );
 };
