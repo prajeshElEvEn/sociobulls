@@ -1,8 +1,7 @@
 import React from "react";
-import { Collapse, Drawer } from "antd";
+import { Drawer } from "antd";
 import CommentCard from "../cards/CommentCard";
 import CommentForm from "../forms/CommentForm";
-import { CommentOutlined } from "../../assets/icons";
 
 const CommentLayout = ({ onClose, open }) => {
   return (

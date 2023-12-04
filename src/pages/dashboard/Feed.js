@@ -1,17 +1,17 @@
 import React from "react";
-import ProCard from "@ant-design/pro-card";
+import { ProCard } from "@ant-design/pro-components";
 import { PageContainer } from "@ant-design/pro-layout";
 import { Button } from "antd";
-import { CommentLayout, PostCard } from "../../components";
+import { PostCard } from "../../components";
 const Feed = () => {
   return (
     <PageContainer extra={[<Button type="primary">Create Post</Button>]}>
       <ProCard
+        gutter={[16, 16]}
+        colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}
         wrap
-        gutter={[{ xs: 8, sm: 8, md: 16, lg: 24, xl: 32 }, 16]}
-        style={{ marginBlockStart: 16 }}
       >
-        <PostCard user={"user"}></PostCard>
+        <PostCard user={"user"} />
       </ProCard>
     </PageContainer>
   );

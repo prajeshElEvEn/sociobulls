@@ -3,9 +3,9 @@ import { ProCard } from "@ant-design/pro-components";
 import { Avatar, Tooltip } from "antd";
 import { Comment, Icon } from "@ant-design/compatible";
 import CardOption from "./CardOption";
+import CommentLayout from "../layouts/CommentLayout";
 import { EllipsisOutlined } from "../../assets/icons";
 import moment from "moment";
-import CommentLayout from "../layouts/CommentLayout";
 
 const PostCard = ({ user, children }) => {
   const [actionLike, setActionLike] = useState("unliked");
@@ -80,7 +80,7 @@ const PostCard = ({ user, children }) => {
   ];
 
   return (
-    <ProCard bordered>
+    <ProCard colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}>
       <Comment
         actions={actions}
         author={user}
