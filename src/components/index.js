@@ -5,6 +5,7 @@ import CardOption from "./cards/CardOption";
 import CommentCard from "./cards/CommentCard";
 import PostCard from "./cards/PostCard";
 import CommentForm from "./forms/CommentForm";
+import PostForm from "./forms/PostForm";
 
 export {
   AuthLayout,
@@ -13,5 +14,6 @@ export {
   CardOption,
   CommentCard,
   PostCard,
+  PostForm,
   CommentForm,
 };
