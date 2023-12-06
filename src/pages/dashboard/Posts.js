@@ -1,6 +1,6 @@
 import { ProCard, PageContainer } from "@ant-design/pro-components";
 import React from "react";
-import { PostCard } from "../../components";
+import { PostTable } from "../../components";
 
 const Posts = () => {
   return (
@@ -10,7 +10,7 @@ const Posts = () => {
         colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}
         wrap
       >
-        <PostCard user={"user"} />
+        <PostTable />
       </ProCard>
     </PageContainer>
   );

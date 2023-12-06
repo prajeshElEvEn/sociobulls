@@ -8,6 +8,7 @@ import CommentForm from "./forms/CommentForm";
 import PostForm from "./forms/PostForm";
 import ProfileCard from "./cards/ProfileCard";
 import ProfileForm from "./forms/ProfileForm";
+import PostTable from "./table/PostTable";
 
 export {
   AuthLayout,
@@ -20,4 +21,5 @@ export {
   CommentForm,
   ProfileCard,
   ProfileForm,
+  PostTable,
 };
