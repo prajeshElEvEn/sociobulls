@@ -1,18 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { ProCard, PageContainer } from "@ant-design/pro-components";
-import { Button, Modal } from "antd";
 import { PostCard, PostForm } from "../../components";
+
 const Feed = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <PageContainer extra={[<PostForm />]}>
       <ProCard
@@ -22,15 +12,6 @@ const Feed = () => {
       >
         <PostCard user={"user"} />
       </ProCard>
-      <Modal
-        title="Create Post"
-        open={isModalOpen}
-        onCancel={handleCancel}
-        okButtonProps={{ style: { display: "none" } }}
-        cancelButtonProps={{ style: { display: "none" } }}
-      >
-        {/* <PostForm handleCancel={handleCancel} /> */}
-      </Modal>
     </PageContainer>
   );
 };
