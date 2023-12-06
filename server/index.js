@@ -4,7 +4,7 @@ const { db, loadEnv } = require("./src/utils");
 const { warn, log } = require("logggger");
 const constants = require("./constants");
 const { errorHandler } = require("./src/middlewares/errorMiddlewares");
-const { auth, user, todo } = require("./src/routes");
+const { auth, user, post, health } = require("./src/routes");
 
 const startServer = () => {
   const currentEnv = loadEnv();
@@ -17,9 +17,10 @@ const startServer = () => {
   app.use(express.urlencoded({ extended: false }));
   app.use("/uploads", express.static(constants.paths.uploadDir));
 
+  app.use("/api/health", health);
   app.use("/api/auth", auth);
   app.use("/api/users", user);
-  app.use("/api/todos", todo);
+  app.use("/api/posts", post);
 
   app.use(errorHandler);
 
@@ -27,6 +28,7 @@ const startServer = () => {
     warn(`Current environment: ${currentEnv}`);
     await db();
     log(`Server running at http://${hostname}:${port}`);
+    log(`Check server health at http://${hostname}:${port}/api/health`);
   });
 };
 
