@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { ProCard } from "@ant-design/pro-components";
 import { Avatar, Tooltip } from "antd";
 import { Comment, Icon } from "@ant-design/compatible";
-import CardOption from "./CardOption";
 import CommentLayout from "../layouts/CommentLayout";
-import { EllipsisOutlined } from "../../assets/icons";
 import moment from "moment";
 
 const PostCard = ({ user, children }) => {
@@ -76,7 +74,6 @@ const PostCard = ({ user, children }) => {
       </Tooltip>
       <span style={{ paddingLeft: 8, cursor: "auto" }}>{comments}</span>
     </span>,
-    <CardOption user={true} icon={<EllipsisOutlined />} />,
   ];
 
   return (

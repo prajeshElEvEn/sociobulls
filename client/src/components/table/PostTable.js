@@ -27,12 +27,6 @@ const defaultData = [
     updated_at: 1590486176000,
     comments: [
       {
-        id: 6247,
-        comment: "this is some comment",
-        created_at: 1590486176000,
-        author: "John Doe",
-      },
-      {
         id: 6248,
         comment: "this is some comment",
         created_at: 1590486176000,
@@ -181,6 +175,7 @@ const expandedRowRender = (record) => {
         success: true,
       })}
       value={record.comments || []}
+      pagination={false}
     />
   );
 };
@@ -206,7 +201,7 @@ const SomeTable = () => {
         columns={columns}
         request={async () => ({
           data: defaultData,
-          total: 3,
+          total: defaultData.length,
           success: true,
         })}
         value={dataSource}
@@ -219,6 +214,9 @@ const SomeTable = () => {
           },
           onChange: setEditableRowKeys,
           actionRender: (row, config, dom) => [dom.save, dom.cancel],
+        }}
+        pagination={{
+          showQuickJumper: true,
         }}
       />
     </>
