@@ -1,44 +1,41 @@
+import {
+  ModalForm,
+  ProFormText,
+  ProFormTextArea,
+} from "@ant-design/pro-components";
 import { Button, Form, Input, Space } from "antd";
 import React from "react";
 
-const PostForm = ({ handleCancel }) => {
-  const [form] = Form.useForm();
-
-  const onFinish = (values) => {
+const PostForm = () => {
+  const handleSubmit = (values) => {
     console.log(values);
-    form.resetFields();
-    handleCancel();
   };
 
   return (
-    <Form
-      layout="vertical"
-      form={form}
-      name="create-post"
-      onFinish={onFinish}
-      style={{
-        maxWidth: 600,
+    <ModalForm
+      title="Create Post"
+      trigger={<Button type="primary">Create Post</Button>}
+      submitter={{
+        searchConfig: {
+          submitText: "Submit",
+          resetText: "Cancel",
+        },
       }}
+      onFinish={handleSubmit}
     >
-      <Form.Item
+      <ProFormTextArea
+        colProps={{ span: 24 }}
         name="post"
         label="Post"
+        placeholder="What's on your mind?"
         rules={[
           {
             required: true,
+            message: "Post is required!",
           },
         ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item>
-        <Space>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Space>
-      </Form.Item>
-    </Form>
+      />
+    </ModalForm>
   );
 };
 

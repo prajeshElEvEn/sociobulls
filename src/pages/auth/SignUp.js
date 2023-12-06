@@ -1,78 +1,95 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
-import { KeyOutlined, MailOutlined, UserOutlined } from "../../assets/icons";
+import { Button, Space } from "antd";
+import { LockOutlined, MailOutlined, UserOutlined } from "../../assets/icons";
 import { Link } from "react-router-dom";
+import { LoginForm, ProFormText } from "@ant-design/pro-components";
 
 const SignUp = () => {
-  const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const handleSubmit = (values) => {
+    console.log(values);
   };
 
   return (
-    <Form
-      form={form}
-      name="signup"
-      layout="vertical"
-      onFinish={onFinish}
-      style={{
-        maxWidth: 400,
+    <LoginForm
+      title="SocioBulls"
+      subTitle="social media for algobulls"
+      logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+      actions={
+        <Space>
+          Already have an account? <Link to="/auth">Sign In</Link>
+        </Space>
+      }
+      onFinish={handleSubmit}
+      submitter={{
+        render: (props, doms) => {
+          console.log(props);
+          return [
+            <Button
+              type="primary"
+              key="submit"
+              onClick={() => props.form?.submit?.()}
+            >
+              Sign Up
+            </Button>,
+            ...doms,
+          ];
+        },
       }}
-      scrollToFirstError
     >
-      <Form.Item
-        name="name"
-        label="Name"
+      <ProFormText
+        name="Name"
+        fieldProps={{
+          size: "large",
+          prefix: <UserOutlined className={"prefixIcon"} />,
+        }}
+        placeholder={"John Doe"}
         rules={[
           {
             required: true,
-            message: "Please input your nickname!",
-            whitespace: true,
+            message: "Name is required!",
           },
         ]}
-      >
-        <Input prefix={<UserOutlined />} placeholder="John Doe" />
-      </Form.Item>
-      <Form.Item
+      />
+      <ProFormText
         name="email"
-        label="E-mail"
+        fieldProps={{
+          size: "large",
+          prefix: <MailOutlined className={"prefixIcon"} />,
+        }}
+        placeholder={"email@example.com"}
         rules={[
           {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
             required: true,
-            message: "Please input your E-mail!",
+            message: "Email id is required!",
           },
         ]}
-      >
-        <Input prefix={<MailOutlined />} placeholder="name@example.com" />
-      </Form.Item>
+      />
 
-      <Form.Item
+      <ProFormText.Password
         name="password"
-        label="Password"
+        fieldProps={{
+          size: "large",
+          prefix: <LockOutlined className={"prefixIcon"} />,
+        }}
+        placeholder={"password"}
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Password is required!",
           },
         ]}
-        hasFeedback
-      >
-        <Input.Password prefix={<KeyOutlined />} placeholder="password" />
-      </Form.Item>
-
-      <Form.Item
+      />
+      <ProFormText.Password
         name="confirm"
-        label="Confirm Password"
-        dependencies={["password"]}
-        hasFeedback
+        fieldProps={{
+          size: "large",
+          prefix: <LockOutlined className={"prefixIcon"} />,
+        }}
+        placeholder={"password"}
         rules={[
           {
             required: true,
-            message: "Please confirm your password!",
+            message: "Password is required!",
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
@@ -85,16 +102,8 @@ const SignUp = () => {
             },
           }),
         ]}
-      >
-        <Input.Password prefix={<KeyOutlined />} placeholder="password" />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Sign Up
-        </Button>{" "}
-        or <Link to="/auth">Sign In</Link>
-      </Form.Item>
-    </Form>
+      />
+    </LoginForm>
   );
 };
 

@@ -1,10 +1,10 @@
-import { Button, Form, Input, Space, Upload } from "antd";
+import { Button, Form, Upload } from "antd";
 import React from "react";
+import { ModalForm, ProFormText } from "@ant-design/pro-components";
 import { UploadOutlined } from "../../assets/icons";
 
-const ProfileForm = ({ handleCancel }) => {
-  const [form] = Form.useForm();
-  const avatarFile = (e) => {
+const ProfileForm = () => {
+  const normFile = (e) => {
     console.log("Upload event:", e);
     if (Array.isArray(e)) {
       return e;
@@ -12,42 +12,34 @@ const ProfileForm = ({ handleCancel }) => {
     return e?.fileList;
   };
 
-  const onFinish = (values) => {
+  const handleSubmit = (values) => {
     console.log(values);
-    form.resetFields();
-    handleCancel();
   };
+
   return (
-    <Form
-      layout="vertical"
-      form={form}
-      name="edit-profile"
-      onFinish={onFinish}
-      style={{
-        maxWidth: 600,
+    <ModalForm
+      title="Edit Profile"
+      trigger={<Button>Edit Profile</Button>}
+      submitter={{
+        searchConfig: {
+          submitText: "Save",
+          resetText: "Cancel",
+        },
       }}
+      onFinish={handleSubmit}
     >
-      <Form.Item name="name" label="Name">
-        <Input />
-      </Form.Item>
+      <ProFormText width="md" name="name" label="Name" placeholder="John Doe" />
       <Form.Item
-        name="avatar"
-        label="Avatar"
+        name="upload"
+        label="Upload"
         valuePropName="fileList"
-        getValueFromEvent={avatarFile}
+        getValueFromEvent={normFile}
       >
         <Upload name="logo" action="/upload.do" listType="picture">
           <Button icon={<UploadOutlined />}>Click to upload</Button>
         </Upload>
       </Form.Item>
-      <Form.Item>
-        <Space>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Space>
-      </Form.Item>
-    </Form>
+    </ModalForm>
   );
 };
 

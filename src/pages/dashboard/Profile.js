@@ -4,21 +4,9 @@ import React, { useState } from "react";
 import { ProfileCard, ProfileForm } from "../../components";
 
 const Profile = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   return (
     <PageContainer
-      extra={[
-        <Button onClick={showModal}>Edit Profile</Button>,
-        <Button type="primary">Logout</Button>,
-      ]}
+      extra={[<ProfileForm />, <Button type="primary">Logout</Button>]}
     >
       <ProCard
         gutter={[16, 16]}
@@ -27,15 +15,6 @@ const Profile = () => {
       >
         <ProfileCard />
       </ProCard>
-      <Modal
-        title="Edit Profile"
-        open={isModalOpen}
-        onCancel={handleCancel}
-        okButtonProps={{ style: { display: "none" } }}
-        cancelButtonProps={{ style: { display: "none" } }}
-      >
-        <ProfileForm handleCancel={handleCancel} />
-      </Modal>
     </PageContainer>
   );
 };

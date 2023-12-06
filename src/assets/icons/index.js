@@ -9,7 +9,9 @@ import {
   CommentOutlined,
   UploadOutlined,
   MailOutlined,
-  KeyOutlined,
+  LockOutlined,
+  LoadingOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 
 export {
@@ -23,5 +25,7 @@ export {
   CommentOutlined,
   UploadOutlined,
   MailOutlined,
-  KeyOutlined,
+  LockOutlined,
+  LoadingOutlined,
+  PlusOutlined,
 };

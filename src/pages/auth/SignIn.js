@@ -1,61 +1,70 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
-import { KeyOutlined, MailOutlined } from "../../assets/icons";
+import { LoginForm, ProFormText } from "@ant-design/pro-components";
+import { Button, Space } from "antd";
 import { Link } from "react-router-dom";
+import { LockOutlined, MailOutlined } from "../../assets/icons";
+
+const handleSubmit = (values) => {
+  console.log(values);
+};
 
 const SignIn = () => {
-  const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
   return (
-    <Form
-      form={form}
-      name="signin"
-      onFinish={onFinish}
-      layout="vertical"
-      style={{
-        maxWidth: 400,
+    <LoginForm
+      title="SocioBulls"
+      subTitle="social media for algobulls"
+      logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+      actions={
+        <Space>
+          Don't have an account? <Link to="/auth/signup">Sign Up</Link>
+        </Space>
+      }
+      onFinish={handleSubmit}
+      submitter={{
+        render: (props, doms) => {
+          console.log(props);
+          return [
+            <Button
+              type="primary"
+              key="submit"
+              onClick={() => props.form?.submit?.()}
+            >
+              Sign In
+            </Button>,
+            ...doms,
+          ];
+        },
       }}
-      scrollToFirstError
     >
-      <Form.Item
+      <ProFormText
         name="email"
-        label="E-mail"
+        fieldProps={{
+          size: "large",
+          prefix: <MailOutlined className={"prefixIcon"} />,
+        }}
+        placeholder={"email@example.com"}
         rules={[
           {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
             required: true,
-            message: "Please input your E-mail!",
+            message: "Email id is required!",
           },
         ]}
-      >
-        <Input prefix={<MailOutlined />} placeholder="name@example.com" />
-      </Form.Item>
-
-      <Form.Item
+      />
+      <ProFormText.Password
         name="password"
-        label="Password"
+        fieldProps={{
+          size: "large",
+          prefix: <LockOutlined className={"prefixIcon"} />,
+        }}
+        placeholder={"password"}
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Password is required!",
           },
         ]}
-        hasFeedback
-      >
-        <Input.Password prefix={<KeyOutlined />} placeholder="password" />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Sign In
-        </Button>{" "}
-        or <Link to="/auth/signup">Sign Up</Link>
-      </Form.Item>
-    </Form>
+      />
+    </LoginForm>
   );
 };
 

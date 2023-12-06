@@ -11,6 +11,7 @@ const RootLayout = () => {
     <div>
       <ProLayout
         title={"SocioBulls"}
+        logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
         {...menuItems}
         location={{
           pathname,

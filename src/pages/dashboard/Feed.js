@@ -14,13 +14,7 @@ const Feed = () => {
   };
 
   return (
-    <PageContainer
-      extra={[
-        <Button type="primary" onClick={showModal}>
-          Create Post
-        </Button>,
-      ]}
-    >
+    <PageContainer extra={[<PostForm />]}>
       <ProCard
         gutter={[16, 16]}
         colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}
@@ -35,7 +29,7 @@ const Feed = () => {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <PostForm handleCancel={handleCancel} />
+        {/* <PostForm handleCancel={handleCancel} /> */}
       </Modal>
     </PageContainer>
   );
