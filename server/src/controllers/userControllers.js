@@ -22,7 +22,7 @@ const getUser = asyncHandler(async (req, res) => {
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
   const userId = req.params.id;
-  const { firstName, lastName, email, newPassword, role } = req.body;
+  const { name } = req.body;
   const user = await User.findById(userId);
 
   if (!user) {
@@ -30,22 +30,8 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  if (firstName) {
-    user.firstName = firstName;
-  }
-  if (lastName) {
-    user.lastName = lastName;
-  }
-  if (email) {
-    user.email = email;
-  }
-  if (newPassword) {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-    user.password = hashedPassword;
-  }
-  if (role) {
-    user.role = role;
+  if (name) {
+    user.name = name;
   }
 
   if (req.file) {
@@ -72,7 +58,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   await user.deleteOne();
 
-  res.status(204).json({ id: user._id, message: "User deleted" });
+  res.status(200).json({ id: user._id, message: "User deleted" });
 });
 
 module.exports = {

@@ -7,40 +7,39 @@ const { generateToken } = require("../utils");
 // @route   POST /api/auth/register
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-  if (!firstName || !lastName || !email || !password) {
+  if (!name || !email || !password) {
     res.status(400);
-    throw new Error("fill in all the fields");
+    throw new Error("Fill in all the fields");
   }
 
   const userExists = await User.findOne({ email });
 
   if (userExists) {
     res.status(400);
-    throw new Error("user already exists");
+    throw new Error("User already exists");
   }
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
   const user = await User.create({
-    firstName,
-    lastName,
+    name,
     email,
     password: hashedPassword,
   });
 
   if (!user) {
     res.status(400);
-    throw new Error("registration failed");
+    throw new Error("Registration failed");
   }
 
   const token = generateToken(user._id);
 
   if (!token) {
     res.status(500);
-    throw new Error("token generation failed");
+    throw new Error("Token generation failed");
   }
 
   res.status(201).json({ id: user._id, token });
@@ -54,14 +53,14 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (!email || !password) {
     res.status(400);
-    throw new Error("please fill in all the fields");
+    throw new Error("Please fill in all the fields");
   }
 
   const user = await User.findOne({ email });
 
   if (!user) {
     res.status(401);
-    throw new Error("invalid credentials");
+    throw new Error("User not found");
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
