@@ -8,9 +8,9 @@ import {
 const initialState = {
   user: null,
   users: [],
-  isLoading: false,
-  isError: false,
-  message: "",
+  userIsLoading: false,
+  userIsError: false,
+  userMessage: "",
 };
 
 export const getUser = createAsyncThunk(
@@ -75,58 +75,58 @@ export const userSlice = createSlice({
   extraReducers: (builders) => {
     builders
       .addCase(getUser.pending, (state, action) => {
-        state.isLoading = true;
+        state.userIsLoading = true;
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.userIsLoading = false;
         state.user = action.payload;
-        state.isError = false;
+        state.userIsError = false;
       })
       .addCase(getUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.userIsLoading = false;
         state.user = null;
-        state.isError = true;
-        state.message = action.payload;
+        state.userIsError = true;
+        state.userMessage = action.payload;
       })
       .addCase(updateUser.pending, (state, action) => {
-        state.isLoading = true;
+        state.userIsLoading = true;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.userIsLoading = false;
         if (state.user._id === action.payload._id) {
           state.user = action.payload;
         }
         state.users = state.users.map((user) =>
           user._id === action.payload._id ? action.payload : user
         );
-        state.message = action.payload;
-        state.isError = false;
+        state.userMessage = action.payload;
+        state.userIsError = false;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.userIsLoading = false;
         state.user = null;
-        state.isError = true;
-        state.message = action.payload;
+        state.userIsError = true;
+        state.userMessage = action.payload;
       })
       .addCase(deleteUser.pending, (state, action) => {
-        state.isLoading = true;
+        state.userIsLoading = true;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.userIsLoading = false;
         if (state.user._id === action.payload._id) {
           state.user = null;
         }
         state.users = state.users.filter(
           (user) => user._id !== action.payload._id
         );
-        state.message = action.payload;
-        state.isError = false;
+        state.userMessage = action.payload;
+        state.userIsError = false;
       })
       .addCase(deleteUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.userIsLoading = false;
         state.user = null;
-        state.isError = true;
-        state.message = action.payload;
+        state.userIsError = true;
+        state.userMessage = action.payload;
       });
   },
 });

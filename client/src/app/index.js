@@ -1,2 +1,4 @@
 import { router } from "./router/index";
-export { router };
+import { store } from "./store/index";
+
+export { router, store };

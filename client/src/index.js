@@ -5,13 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ConfigProvider } from "antd";
 import enUS from "antd/locale/en_US";
+import { Provider } from "react-redux";
+import { store } from "./app";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ConfigProvider locale={enUS}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
   </ConfigProvider>
 );
 
