@@ -221,7 +221,7 @@ export const postSlice = createSlice({
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         state.posts = state.posts.filter(
-          (post) => post._id !== action.payload._id
+          (post) => post._id !== action.payload.id
         );
         state.postMessage = action.payload;
         state.postIsLoading = false;
