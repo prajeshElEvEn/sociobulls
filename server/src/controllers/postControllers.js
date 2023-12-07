@@ -72,7 +72,6 @@ const createPost = asyncHandler(async (req, res) => {
 // @route   PUT /api/posts/:id
 // @access  Private
 const updatePost = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
   const postId = req.params.id;
   const { title, like, bookmark, comment } = req.body;
 
