@@ -88,13 +88,46 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 
   if (like) {
-    // code for updating likes
+    const { id: likeId } = like;
+    const existingLike = post.likes.find(
+      (l) => l.id.toString() === likeId.toString()
+    );
+
+    if (existingLike) {
+      post.likes = post.likes.filter(
+        (l) => l.id.toString() !== likeId.toString()
+      );
+    } else {
+      post.likes.push(like);
+    }
   }
+
   if (bookmark) {
-    // code for updating bookmarks
+    const { id: bookmarkId } = bookmark;
+    const existingBookmark = post.bookmarks.find(
+      (b) => b.id.toString() === bookmarkId.toString()
+    );
+
+    if (existingBookmark) {
+      post.bookmarks = post.bookmarks.filter(
+        (b) => b.id.toString() !== bookmarkId.toString()
+      );
+    } else {
+      post.bookmarks.push(bookmark);
+    }
   }
+
   if (comment) {
-    // code for updating comments
+    const { id } = comment;
+    const existingCommentIndex = post.comments.findIndex(
+      (comment) => comment.id.toString() === id
+    );
+
+    if (existingCommentIndex !== -1) {
+      post.comments[existingCommentIndex] = comment;
+    } else {
+      post.comments.push(comment);
+    }
   }
 
   const updatedPost = await post.save();
@@ -117,7 +150,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
   await post.deleteOne();
 
-  res.status(204).json({ id: post._id, message: "post deleted" });
+  res.status(200).json({ id: post._id, message: "post deleted" });
 });
 
 module.exports = {
