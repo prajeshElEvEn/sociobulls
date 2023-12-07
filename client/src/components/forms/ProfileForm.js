@@ -1,5 +1,5 @@
 import { Button, Form, Upload } from "antd";
-import React from "react";
+import React, { useRef } from "react";
 import { ModalForm, ProFormText } from "@ant-design/pro-components";
 import { UploadOutlined } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,9 +15,11 @@ const normFile = (e) => {
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
+  const formRef = useRef();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     dispatch(updateUser({ id: id, ...values }));
+    formRef.current?.resetFields();
     return true;
   };
 
@@ -32,6 +34,7 @@ const ProfileForm = () => {
         },
       }}
       onFinish={handleSubmit}
+      formRef={formRef}
     >
       <ProFormText width="md" name="name" label="Name" placeholder="John Doe" />
       <Form.Item

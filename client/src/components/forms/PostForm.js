@@ -1,14 +1,19 @@
-import {
-  ModalForm,
-  ProFormText,
-  ProFormTextArea,
-} from "@ant-design/pro-components";
-import { Button, Form, Input, Space } from "antd";
-import React from "react";
+import { ModalForm, ProFormTextArea } from "@ant-design/pro-components";
+import { Button } from "antd";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { createPost, getPosts } from "../../features/post/postSlice";
 
 const PostForm = () => {
-  const handleSubmit = (values) => {
+  const dispatch = useDispatch();
+  const formRef = useRef();
+
+  const handleSubmit = async (values) => {
     console.log(values);
+    await dispatch(createPost(values));
+    await dispatch(getPosts());
+    formRef.current?.resetFields();
+    return true;
   };
 
   return (
@@ -22,10 +27,11 @@ const PostForm = () => {
         },
       }}
       onFinish={handleSubmit}
+      formRef={formRef}
     >
       <ProFormTextArea
         colProps={{ span: 24 }}
-        name="post"
+        name="title"
         label="Post"
         placeholder="What's on your mind?"
         rules={[

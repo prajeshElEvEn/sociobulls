@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProCard } from "@ant-design/pro-components";
 import { Avatar, Tooltip } from "antd";
 import { Comment, Icon } from "@ant-design/compatible";
 import CommentLayout from "../layouts/CommentLayout";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePost } from "../../features/post/postSlice";
 
-const PostCard = ({ user, children }) => {
+const PostCard = ({ post }) => {
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth);
+
+  const [like, setLike] = useState({
+    id: "",
+    like: {
+      id: "",
+    },
+  });
+
   const [actionLike, setActionLike] = useState("unliked");
   const [likes, setLikes] = useState(0);
   const [actionBookmark, setActionBookmark] = useState("unbookmarked");
@@ -14,16 +26,21 @@ const PostCard = ({ user, children }) => {
   const [comments, setComments] = useState(0);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setLike({
+      id: post._id,
+      like: {
+        id: id,
+      },
+    });
+  }, [id, post]);
+
   const onClose = () => {
     setOpen(false);
   };
 
-  const handleLike = () => {
-    const newAction = actionLike === "liked" ? "unliked" : "liked";
-    setActionLike(newAction);
-    setLikes((prevLikes) =>
-      newAction === "liked" ? prevLikes + 1 : prevLikes - 1
-    );
+  const handleLike = async () => {
+    await dispatch(updatePost(like));
   };
   const handleBookmark = () => {
     const newAction =
@@ -48,11 +65,15 @@ const PostCard = ({ user, children }) => {
       <Tooltip title="Like">
         <Icon
           type="heart"
-          theme={actionLike === "liked" ? "filled" : "outlined"}
+          theme={
+            post?.likes.some((like) => like.id === id) ? "filled" : "outlined"
+          }
           onClick={handleLike}
         />
       </Tooltip>
-      <span style={{ paddingLeft: 8, cursor: "auto" }}>{likes}</span>
+      <span style={{ paddingLeft: 8, cursor: "auto" }}>
+        {post?.likes.length}
+      </span>
     </span>,
     <span key="comment-basic-bookmark">
       <Tooltip title="Bookmark">
@@ -62,7 +83,9 @@ const PostCard = ({ user, children }) => {
           onClick={handleBookmark}
         />
       </Tooltip>
-      <span style={{ paddingLeft: 8, cursor: "auto" }}>{bookmarks}</span>
+      <span style={{ paddingLeft: 8, cursor: "auto" }}>
+        {post?.bookmarks.length}
+      </span>
     </span>,
     <span key="comment-basic-comment">
       <Tooltip title="Comment">
@@ -72,7 +95,9 @@ const PostCard = ({ user, children }) => {
           onClick={handleComment}
         />
       </Tooltip>
-      <span style={{ paddingLeft: 8, cursor: "auto" }}>{comments}</span>
+      <span style={{ paddingLeft: 8, cursor: "auto" }}>
+        {post?.comments.length}
+      </span>
     </span>,
   ];
 
@@ -80,24 +105,21 @@ const PostCard = ({ user, children }) => {
     <ProCard colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}>
       <Comment
         actions={actions}
-        author={user}
+        author={post?.author.name}
         avatar={
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="Han Solo"
+            src={`${process.env.REACT_APP_AVATAR_URL}${post?.author.avatar}`}
+            alt={post?.author.name}
           />
         }
-        content={
-          "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
-        }
+        content={post?.title}
         datetime={
           <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-            <span>{moment().fromNow()}</span>
+            <span>{moment(post?.createdAt).fromNow()}</span>
           </Tooltip>
         }
-      >
-        {children}
-      </Comment>
+      />
+
       <CommentLayout onClose={onClose} open={open} />
     </ProCard>
   );

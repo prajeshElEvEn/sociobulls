@@ -1,4 +1,3 @@
-import axios from "axios";
 import { authInstance } from "../../utils";
 const URL = "/posts";
 
@@ -31,18 +30,18 @@ const getUserBookmarkedPostService = async (formData) => {
 };
 
 const createPostService = async (formData) => {
-  const response = await axios.post(URL, formData);
+  const response = await authInstance.post(URL, formData);
 
   return response.data;
 };
 
 const updatePostService = async (formData) => {
-  const response = await axios.put(URL + formData.id, formData);
+  const response = await authInstance.put(URL + "/" + formData.id, formData);
 
   return response.data;
 };
 const deletePostService = async (formData) => {
-  const response = await axios.delete(URL + formData.id);
+  const response = await authInstance.delete(URL + "/" + formData.id);
 
   return response.data;
 };

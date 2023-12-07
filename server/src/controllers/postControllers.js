@@ -48,7 +48,7 @@ const createPost = asyncHandler(async (req, res) => {
 
   if (!title) {
     res.status(404);
-    throw new Error("pPease fill in all the fields");
+    throw new Error("Please fill in all the fields");
   }
 
   if (!author) {
@@ -87,29 +87,27 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 
   if (like) {
-    const { id: likeId } = like;
+    const { id } = like;
     const existingLike = post.likes.find(
-      (l) => l.id.toString() === likeId.toString()
+      (l) => l.id.toString() === id.toString()
     );
 
     if (existingLike) {
-      post.likes = post.likes.filter(
-        (l) => l.id.toString() !== likeId.toString()
-      );
+      post.likes = post.likes.filter((l) => l.id.toString() !== id.toString());
     } else {
       post.likes.push(like);
     }
   }
 
   if (bookmark) {
-    const { id: bookmarkId } = bookmark;
+    const { id } = bookmark;
     const existingBookmark = post.bookmarks.find(
-      (b) => b.id.toString() === bookmarkId.toString()
+      (b) => b.id.toString() === id.toString()
     );
 
     if (existingBookmark) {
       post.bookmarks = post.bookmarks.filter(
-        (b) => b.id.toString() !== bookmarkId.toString()
+        (b) => b.id.toString() !== id.toString()
       );
     } else {
       post.bookmarks.push(bookmark);
