@@ -10,10 +10,7 @@ const getUserService = async (formData) => {
 
 const updateUserService = async (formData) => {
   const response = await fileInstance.put(
-    URL,
-    "/profile/",
-    formData.id,
-    "/update",
+    URL + "/profile/" + formData.id + "/update",
     formData
   );
 
@@ -22,10 +19,7 @@ const updateUserService = async (formData) => {
 
 const deleteUserService = async (formData) => {
   const response = await authInstance.put(
-    URL,
-    "/profile/",
-    formData.id,
-    "/update"
+    URL + "/profile/" + formData.id + "/delete"
   );
 
   return response.data;

@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   user: null,
-  users: [],
   userIsLoading: false,
   userIsError: false,
   userMessage: "",
@@ -96,9 +95,6 @@ export const userSlice = createSlice({
         if (state.user._id === action.payload._id) {
           state.user = action.payload;
         }
-        state.users = state.users.map((user) =>
-          user._id === action.payload._id ? action.payload : user
-        );
         state.userMessage = action.payload;
         state.userIsError = false;
       })
@@ -116,9 +112,6 @@ export const userSlice = createSlice({
         if (state.user._id === action.payload._id) {
           state.user = null;
         }
-        state.users = state.users.filter(
-          (user) => user._id !== action.payload._id
-        );
         state.userMessage = action.payload;
         state.userIsError = false;
       })

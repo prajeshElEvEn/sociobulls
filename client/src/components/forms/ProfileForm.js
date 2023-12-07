@@ -2,18 +2,23 @@ import { Button, Form, Upload } from "antd";
 import React from "react";
 import { ModalForm, ProFormText } from "@ant-design/pro-components";
 import { UploadOutlined } from "../../assets/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../features/users/userSlice";
+
+const normFile = (e) => {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e?.file.originFileObj;
+};
 
 const ProfileForm = () => {
-  const normFile = (e) => {
-    console.log("Upload event:", e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth);
 
   const handleSubmit = (values) => {
-    console.log(values);
+    dispatch(updateUser({ id: id, ...values }));
+    return true;
   };
 
   return (
@@ -30,12 +35,12 @@ const ProfileForm = () => {
     >
       <ProFormText width="md" name="name" label="Name" placeholder="John Doe" />
       <Form.Item
-        name="upload"
-        label="Upload"
-        valuePropName="fileList"
+        name="avatar"
+        label="Avatar"
+        valuePropName="file"
         getValueFromEvent={normFile}
       >
-        <Upload name="logo" action="/upload.do" listType="picture">
+        <Upload name="avatar" listType="picture" maxCount={1}>
           <Button icon={<UploadOutlined />}>Click to upload</Button>
         </Upload>
       </Form.Item>
