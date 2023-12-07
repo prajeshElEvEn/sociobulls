@@ -35,7 +35,7 @@ const commentSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
-    comment: {
+    title: {
       type: String,
     },
   },

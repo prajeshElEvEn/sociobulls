@@ -10,10 +10,18 @@ import { updatePost } from "../../features/post/postSlice";
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   const [like, setLike] = useState({
     id: "",
     like: {
+      id: "",
+    },
+  });
+
+  const [bookmark, setBookmark] = useState({
+    id: "",
+    bookmark: {
       id: "",
     },
   });
@@ -35,6 +43,15 @@ const PostCard = ({ post }) => {
     });
   }, [id, post]);
 
+  useEffect(() => {
+    setBookmark({
+      id: post._id,
+      bookmark: {
+        id: id,
+      },
+    });
+  }, [id, post]);
+
   const onClose = () => {
     setOpen(false);
   };
@@ -42,14 +59,11 @@ const PostCard = ({ post }) => {
   const handleLike = async () => {
     await dispatch(updatePost(like));
   };
-  const handleBookmark = () => {
-    const newAction =
-      actionBookmark === "bookmarked" ? "unbookmarked" : "bookmarked";
-    setActionBookmark(newAction);
-    setBookmarks((prevBookmarks) =>
-      newAction === "bookmarked" ? prevBookmarks + 1 : prevBookmarks - 1
-    );
+
+  const handleBookmark = async () => {
+    await dispatch(updatePost(bookmark));
   };
+
   const handleComment = () => {
     setOpen(true);
     // const newAction =
@@ -79,7 +93,11 @@ const PostCard = ({ post }) => {
       <Tooltip title="Bookmark">
         <Icon
           type="save"
-          theme={actionBookmark === "bookmarked" ? "filled" : "outlined"}
+          theme={
+            post?.bookmarks.some((bookmark) => bookmark.id === id)
+              ? "filled"
+              : "outlined"
+          }
           onClick={handleBookmark}
         />
       </Tooltip>
@@ -120,7 +138,13 @@ const PostCard = ({ post }) => {
         }
       />
 
-      <CommentLayout onClose={onClose} open={open} />
+      <CommentLayout
+        id={id}
+        user={user}
+        post={post}
+        onClose={onClose}
+        open={open}
+      />
     </ProCard>
   );
 };

@@ -115,16 +115,7 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 
   if (comment) {
-    const { id } = comment;
-    const existingCommentIndex = post.comments.findIndex(
-      (comment) => comment.id.toString() === id
-    );
-
-    if (existingCommentIndex !== -1) {
-      post.comments[existingCommentIndex] = comment;
-    } else {
-      post.comments.push(comment);
-    }
+    post.comments.push(comment);
   }
 
   const updatedPost = await post.save();

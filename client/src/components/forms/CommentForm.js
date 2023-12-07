@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Avatar, Form, Button, Input } from "antd";
 import { Comment } from "@ant-design/compatible";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePost } from "../../features/post/postSlice";
 const { TextArea } = Input;
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
@@ -20,31 +22,48 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </Form.Item>
   </div>
 );
-const CommentForm = () => {
+
+const CommentForm = ({ id, user, post }) => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
-    comment: "",
+    id: post?._id,
+    comment: {
+      id: id,
+      name: user?.name,
+      avatar: user?.avatar,
+      title: "",
+    },
   });
+
   const handleSubmit = () => {
     console.log(formData);
-    setFormData({
-      comment: "",
-    });
+    dispatch(updatePost(formData));
+    // Clear the comment after submitting
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      comment: { ...prevFormData.comment, title: "" },
+    }));
   };
+
   return (
     <Comment
       avatar={
         <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
+          src={`${process.env.REACT_APP_AVATAR_URL}${user?.avatar}`}
+          alt={user?.name}
         />
       }
       content={
         <Editor
           onChange={(e) => {
-            setFormData({ ...formData, comment: e.target.value });
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              comment: { ...prevFormData.comment, title: e.target.value },
+            }));
           }}
           onSubmit={handleSubmit}
-          value={formData.comment}
+          value={formData.comment.title}
         />
       }
     />

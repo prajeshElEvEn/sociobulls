@@ -3,11 +3,13 @@ import { Outlet } from "react-router";
 import menuItems from "../menu";
 import { Link, useNavigate } from "react-router-dom";
 import { ProLayout } from "@ant-design/pro-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../features/users/userSlice";
 
 const RootLayout = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status } = useSelector((state) => state.auth);
+  const { id, status } = useSelector((state) => state.auth);
 
   const [pathname, setPathname] = useState("/");
 
@@ -16,6 +18,12 @@ const RootLayout = () => {
       navigate("/auth");
     }
   }, [navigate, status]);
+
+  useEffect(() => {
+    if (status) {
+      dispatch(getUser({ id: id }));
+    }
+  }, [dispatch, status, id]);
 
   return (
     <div>

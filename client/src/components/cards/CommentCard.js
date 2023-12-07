@@ -4,22 +4,20 @@ import { Avatar } from "antd";
 import { Tooltip } from "antd";
 import moment from "moment";
 
-const CommentCard = () => {
+const CommentCard = ({ comment }) => {
   return (
     <Comment
-      author={"John Doe"}
+      author={comment?.name}
       avatar={
         <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
+          src={`${process.env.REACT_APP_AVATAR_URL}${comment?.avatar}`}
+          alt={comment?.name}
         />
       }
-      content={
-        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
-      }
+      content={comment?.title}
       datetime={
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-          <span>{moment().fromNow()}</span>
+          <span>{moment(comment?.createdAt).fromNow()}</span>
         </Tooltip>
       }
     />
