@@ -25,18 +25,11 @@ const PostCard = ({ post }) => {
       id: "",
     },
   });
-
-  const [actionLike, setActionLike] = useState("unliked");
-  const [likes, setLikes] = useState(0);
-  const [actionBookmark, setActionBookmark] = useState("unbookmarked");
-  const [bookmarks, setBookmarks] = useState(0);
-  const [actionComment, setActionComment] = useState("uncommented");
-  const [comments, setComments] = useState(0);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setLike({
-      id: post._id,
+      id: post?._id,
       like: {
         id: id,
       },
@@ -45,7 +38,7 @@ const PostCard = ({ post }) => {
 
   useEffect(() => {
     setBookmark({
-      id: post._id,
+      id: post?._id,
       bookmark: {
         id: id,
       },
@@ -66,12 +59,6 @@ const PostCard = ({ post }) => {
 
   const handleComment = () => {
     setOpen(true);
-    // const newAction =
-    //   actionComment === "commented" ? "uncommented" : "commented";
-    // setActionComment(newAction);
-    // setComments((prevComments) =>
-    //   newAction === "commented" ? prevComments + 1 : prevComments - 1
-    // );
   };
 
   const actions = [
@@ -109,7 +96,11 @@ const PostCard = ({ post }) => {
       <Tooltip title="Comment">
         <Icon
           type="message"
-          theme={actionComment === "commented" ? "filled" : "outlined"}
+          theme={
+            post?.comments.some((comment) => comment.id === id)
+              ? "filled"
+              : "outlined"
+          }
           onClick={handleComment}
         />
       </Tooltip>

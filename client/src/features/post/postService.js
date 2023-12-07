@@ -8,14 +8,14 @@ const getPostsService = async () => {
 };
 
 const getUserPostService = async (formData) => {
-  const response = await authInstance.get(URL + "/user" + formData.id);
+  const response = await authInstance.get(URL + "/user/" + formData.id);
 
   return response.data;
 };
 
 const getUserLikedPostService = async (formData) => {
   const response = await authInstance.get(
-    URL + "/user" + formData.id + "/liked"
+    URL + "/user/" + formData.id + "/liked"
   );
 
   return response.data;
@@ -23,7 +23,7 @@ const getUserLikedPostService = async (formData) => {
 
 const getUserBookmarkedPostService = async (formData) => {
   const response = await authInstance.get(
-    URL + "/user" + formData.id + "/bookmarked"
+    URL + "/user/" + formData.id + "/bookmarked"
   );
 
   return response.data;

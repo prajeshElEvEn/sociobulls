@@ -1,8 +1,18 @@
 import { ProCard, PageContainer } from "@ant-design/pro-components";
-import React from "react";
+import React, { useEffect } from "react";
 import { PostCard } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserLikedPosts } from "../../features/post/postSlice";
 
 const Likes = () => {
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth);
+  const { posts } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(getUserLikedPosts({ id: id }));
+  }, [dispatch, id]);
+
   return (
     <PageContainer>
       <ProCard
@@ -10,7 +20,9 @@ const Likes = () => {
         colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}
         wrap
       >
-        <PostCard user={"user"} />
+        {posts.map((post) => (
+          <PostCard key={post?._id} post={post} />
+        ))}
       </ProCard>
     </PageContainer>
   );
