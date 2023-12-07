@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import menuItems from "../menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProLayout } from "@ant-design/pro-components";
+import { useSelector } from "react-redux";
 
 const RootLayout = () => {
+  const navigate = useNavigate();
+  const { status } = useSelector((state) => state.auth);
+
   const [pathname, setPathname] = useState("/");
+
+  useEffect(() => {
+    if (!status) {
+      navigate("/auth");
+    }
+  }, [navigate, status]);
 
   return (
     <div>

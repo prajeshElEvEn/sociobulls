@@ -2,8 +2,8 @@ import { authInstance, fileInstance } from "../../utils";
 
 const URL = "/users";
 
-const getUserService = async (id) => {
-  const response = await authInstance.get(URL, "/profile/", id);
+const getUserService = async (formData) => {
+  const response = await authInstance.get(URL + "/profile/" + formData.id);
 
   return response.data;
 };
@@ -20,8 +20,13 @@ const updateUserService = async (formData) => {
   return response.data;
 };
 
-const deleteUserService = async (id) => {
-  const response = await authInstance.put(URL, "/profile/", id, "/update");
+const deleteUserService = async (formData) => {
+  const response = await authInstance.put(
+    URL,
+    "/profile/",
+    formData.id,
+    "/update"
+  );
 
   return response.data;
 };

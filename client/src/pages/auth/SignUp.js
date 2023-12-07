@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Space } from "antd";
 import { LockOutlined, MailOutlined, UserOutlined } from "../../assets/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginForm, ProFormText } from "@ant-design/pro-components";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../features/auth/authSlice";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { status } = useSelector((state) => state.auth);
+
   const handleSubmit = (values) => {
     console.log(values);
+    dispatch(register(values));
   };
+
+  useEffect(() => {
+    if (status) {
+      navigate("/");
+    }
+  }, [navigate, status]);
 
   return (
     <LoginForm
@@ -37,7 +50,7 @@ const SignUp = () => {
       }}
     >
       <ProFormText
-        name="Name"
+        name="name"
         fieldProps={{
           size: "large",
           prefix: <UserOutlined className={"prefixIcon"} />,

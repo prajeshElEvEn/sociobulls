@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LoginForm, ProFormText } from "@ant-design/pro-components";
 import { Button, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "../../assets/icons";
-
-const handleSubmit = (values) => {
-  console.log(values);
-};
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../features/auth/authSlice";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { status } = useSelector((state) => state.auth);
+
+  const handleSubmit = (values) => {
+    console.log(values);
+    dispatch(login(values));
+  };
+
+  useEffect(() => {
+    if (status) {
+      navigate("/");
+    }
+  }, [navigate, status]);
+
   return (
     <LoginForm
       title="SocioBulls"

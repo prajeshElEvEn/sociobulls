@@ -3,19 +3,23 @@ import { Avatar, Card } from "antd";
 import React from "react";
 const { Meta } = Card;
 
-const ProfileCard = () => {
+const ProfileCard = ({ user }) => {
   return (
     <ProCard colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}>
       <Card>
         <Meta
           avatar={
             <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              src={user?.avatar}
+              style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
               size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-            />
+              alt={user?.name}
+            >
+              {user?.name.charAt(0)}
+            </Avatar>
           }
-          title="John Doe"
-          description="email"
+          title={user?.name}
+          description={user?.email}
         />
       </Card>
     </ProCard>

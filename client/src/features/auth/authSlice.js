@@ -81,6 +81,7 @@ export const authSlice = createSlice({
         state.id = action.payload.id;
         state.authIsLoading = false;
         state.authIsError = false;
+        state.authMessage = "";
       })
       .addCase(register.rejected, (state, action) => {
         state.status = false;
@@ -99,6 +100,7 @@ export const authSlice = createSlice({
         state.id = action.payload.id;
         state.authIsLoading = false;
         state.authIsError = false;
+        state.authMessage = "";
       })
       .addCase(login.rejected, (state, action) => {
         state.status = false;
