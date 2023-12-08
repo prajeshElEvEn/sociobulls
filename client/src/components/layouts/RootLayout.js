@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ProLayout } from "@ant-design/pro-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../features/users/userSlice";
+import { BrandLogo } from "../../assets/images";
 
 const RootLayout = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const RootLayout = () => {
     <div>
       <ProLayout
         title={"SocioBulls"}
-        logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+        logo={BrandLogo}
         {...menuItems}
         location={{
           pathname,
@@ -55,7 +56,11 @@ const RootLayout = () => {
               }}
             >
               designed by{" "}
-              <a href="http://" target="_blank" rel="noopener noreferrer">
+              <a
+                href="http://bit.ly/prajesheleven"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 eleven
               </a>
             </p>

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LoginForm, ProFormText } from "@ant-design/pro-components";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../features/auth/authSlice";
+import { BrandLogo } from "../../assets/images";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,8 @@ const SignUp = () => {
   return (
     <LoginForm
       title="SocioBulls"
-      subTitle="social media for algobulls"
-      logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+      subTitle="Social media for AlgoBulls"
+      logo={BrandLogo}
       actions={
         <Space>
           Already have an account? <Link to="/auth">Sign In</Link>

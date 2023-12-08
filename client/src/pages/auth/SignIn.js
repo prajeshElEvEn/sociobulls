@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/auth/authSlice";
+import { BrandLogo } from "../../assets/images";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,8 @@ const SignIn = () => {
   return (
     <LoginForm
       title="SocioBulls"
-      subTitle="social media for algobulls"
-      logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+      subTitle="Social media for AlgoBulls"
+      logo={BrandLogo}
       actions={
         <Space>
           Don't have an account? <Link to="/auth/signup">Sign Up</Link>
