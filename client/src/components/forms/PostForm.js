@@ -9,7 +9,6 @@ const PostForm = () => {
   const formRef = useRef();
 
   const handleSubmit = async (values) => {
-    console.log(values);
     await dispatch(createPost(values));
     await dispatch(getPosts());
     formRef.current?.resetFields();

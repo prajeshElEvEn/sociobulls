@@ -13,7 +13,6 @@ const SignIn = () => {
   const { status } = useSelector((state) => state.auth);
 
   const handleSubmit = (values) => {
-    console.log(values);
     dispatch(login(values));
   };
 
@@ -36,7 +35,6 @@ const SignIn = () => {
       onFinish={handleSubmit}
       submitter={{
         render: (props, doms) => {
-          console.log(props);
           return [
             <Button
               type="primary"

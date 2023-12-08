@@ -35,7 +35,7 @@ const RootLayout = () => {
         location={{
           pathname,
         }}
-        onMenuHeaderClick={(e) => console.log(e)}
+        onMenuHeaderClick={() => navigate("/")}
         menuItemRender={(item, dom) => (
           <Link
             to={item.path || "/"}
