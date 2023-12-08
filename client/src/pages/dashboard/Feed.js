@@ -7,11 +7,14 @@ import { Empty } from "antd";
 
 const Feed = () => {
   const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.auth);
   const { posts, postIsLoading } = useSelector((state) => state.post);
 
   useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
+    if (status) {
+      dispatch(getPosts());
+    }
+  }, [dispatch, status]);
 
   return (
     <PageContainer extra={[<PostForm />]}>
@@ -23,7 +26,7 @@ const Feed = () => {
         {postIsLoading ? (
           <Loading />
         ) : posts.length > 0 ? (
-          posts.map((post) => <PostCard post={post} />)
+          posts.map((post) => <PostCard key={post._id} post={post} />)
         ) : (
           <Empty />
         )}

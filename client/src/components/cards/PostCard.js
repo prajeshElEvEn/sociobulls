@@ -130,7 +130,7 @@ const PostCard = ({ post }) => {
         content={post?.title}
         datetime={
           <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-            <span>{moment(post?.updatedAt).fromNow()}</span>
+            <span>{moment(post?.createdAt).fromNow()}</span>
           </Tooltip>
         }
       />
