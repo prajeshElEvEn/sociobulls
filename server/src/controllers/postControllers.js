@@ -41,8 +41,7 @@ const getBookmarkedPosts = asyncHandler(async (req, res) => {
 // @route   POST /api/posts/
 // @access  Private
 const createPost = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
-  const { title } = req.body;
+  const { userId, title } = req.body;
 
   const author = await User.findById(userId).select("-password");
 

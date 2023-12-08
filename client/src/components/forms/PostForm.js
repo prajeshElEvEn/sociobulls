@@ -1,15 +1,17 @@
 import { ModalForm, ProFormTextArea } from "@ant-design/pro-components";
 import { Button } from "antd";
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost, getPosts } from "../../features/post/postSlice";
 
 const PostForm = () => {
   const dispatch = useDispatch();
   const formRef = useRef();
 
+  const { id } = useSelector((state) => state.auth);
+
   const handleSubmit = async (values) => {
-    await dispatch(createPost(values));
+    await dispatch(createPost({ userId: id, ...values }));
     await dispatch(getPosts());
     formRef.current?.resetFields();
     return true;
