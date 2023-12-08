@@ -1,5 +1,3 @@
 # SocioBulls
 
-> Client
-
-social media app for algobulls
+> Client Side
