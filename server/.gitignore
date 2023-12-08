@@ -1,5 +1,6 @@
 node_modules
 .env.development
+.env.production
 
 uploads/avatars/*.png
 uploads/avatars/*.jpg
