@@ -81,7 +81,11 @@ REACT_APP_AVATAR_URL=http://${REACT_APP_SERVER_HOSTNAME}:${REACT_APP_SERVER_PORT
 - [Ant Design Pro](https://pro.ant.design/)
 - [Ant Design Pro Components](https://procomponents.ant.design/en-US)
 - [Ant Design Icons]()
-- [Redux Toolkit]()
-- [Axios]()
-- [Express Js]()
-- [Multer]()
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Axios](https://axios-http.com/)
+- [Express Js](https://expressjs.com/)
+- [Multer](https://www.npmjs.com/package/multer)
+
+## Author
+
+[@prajeshElEvEn](https://bit.ly/prajesheleven)
