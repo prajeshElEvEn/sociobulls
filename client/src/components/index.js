@@ -8,7 +8,7 @@ import PostForm from "./forms/PostForm";
 import ProfileCard from "./cards/ProfileCard";
 import ProfileForm from "./forms/ProfileForm";
 import PostTable from "./table/PostTable";
-import Loading from "./loaders/Loading";
+import Loading from "./utils/Loading";
 
 export {
   AuthLayout,

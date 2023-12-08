@@ -2,18 +2,14 @@ import { EditableProTable } from "@ant-design/pro-components";
 import { Form } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, getUserPosts } from "../../features/post/postSlice";
-import Loading from "../loaders/Loading";
+import {
+  deletePost,
+  getUserPosts,
+  updatePost,
+} from "../../features/post/postSlice";
+import Loading from "../utils/Loading";
 
-const waitTime = (time = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
-
-const SomeTable = () => {
+const PostTable = () => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
   const { posts, postIsLoading } = useSelector((state) => state.post);
@@ -33,6 +29,11 @@ const SomeTable = () => {
   const handleDeletePost = (id) => {
     dispatch(deletePost({ id: id }));
     setDataSource(dataSource.filter((item) => item.id !== id));
+  };
+
+  const handleSubmit = async (values, id) => {
+    await dispatch(updatePost({ id: id, title: values.title }));
+    setEditableRowKeys([]);
   };
 
   const columns = [
@@ -56,6 +57,7 @@ const SomeTable = () => {
         const likesCount = record.likes ? record.likes.length : 0;
         return <span>{likesCount}</span>;
       },
+      editable: false,
     },
     {
       title: "Bookmarks",
@@ -64,6 +66,7 @@ const SomeTable = () => {
         const bookmarksCount = record.bookmarks ? record.bookmarks.length : 0;
         return <span>{bookmarksCount}</span>;
       },
+      editable: false,
     },
     {
       title: "Comments",
@@ -72,16 +75,19 @@ const SomeTable = () => {
         const commentsCount = record.comments ? record.comments.length : 0;
         return <span>{commentsCount}</span>;
       },
+      editable: false,
     },
     {
       title: "Created At",
       dataIndex: "createdAt",
       valueType: "date",
+      editable: false,
     },
     {
       title: "Last Updated",
       dataIndex: "updatedAt",
       valueType: "date",
+      editable: false,
     },
     {
       title: "Action",
@@ -172,8 +178,8 @@ const SomeTable = () => {
         editable={{
           form,
           editableKeys,
-          onSave: async () => {
-            await waitTime(2000);
+          onSave: async (key, row) => {
+            handleSubmit(row, key);
           },
           onChange: setEditableRowKeys,
           actionRender: (row, config, dom) => [dom.save, dom.cancel],
@@ -186,4 +192,4 @@ const SomeTable = () => {
   );
 };
 
-export default SomeTable;
+export default PostTable;

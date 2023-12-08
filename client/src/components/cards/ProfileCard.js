@@ -10,7 +10,11 @@ const ProfileCard = ({ user }) => {
         <Meta
           avatar={
             <Avatar
-              src={`${process.env.REACT_APP_AVATAR_URL}${user?.avatar}`}
+              src={
+                user?.avatar
+                  ? `${process.env.REACT_APP_AVATAR_URL}${user?.avatar}`
+                  : null
+              }
               style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
               size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
               alt={user?.name}

@@ -117,14 +117,20 @@ const PostCard = ({ post }) => {
         author={post?.author.name}
         avatar={
           <Avatar
-            src={`${process.env.REACT_APP_AVATAR_URL}${post?.author.avatar}`}
+            src={
+              post?.author.avatar
+                ? `${process.env.REACT_APP_AVATAR_URL}${post?.author.avatar}`
+                : null
+            }
             alt={post?.author.name}
-          />
+          >
+            {post?.author.name.charAt(0)}
+          </Avatar>
         }
         content={post?.title}
         datetime={
           <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-            <span>{moment(post?.createdAt).fromNow()}</span>
+            <span>{moment(post?.updatedAt).fromNow()}</span>
           </Tooltip>
         }
       />

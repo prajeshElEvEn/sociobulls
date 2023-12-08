@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Form, Button, Input } from "antd";
 import { Comment } from "@ant-design/compatible";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updatePost } from "../../features/post/postSlice";
 const { TextArea } = Input;
 
@@ -37,9 +37,7 @@ const CommentForm = ({ id, user, post }) => {
   });
 
   const handleSubmit = () => {
-    console.log(formData);
     dispatch(updatePost(formData));
-    // Clear the comment after submitting
     setFormData((prevFormData) => ({
       ...prevFormData,
       comment: { ...prevFormData.comment, title: "" },
@@ -50,9 +48,15 @@ const CommentForm = ({ id, user, post }) => {
     <Comment
       avatar={
         <Avatar
-          src={`${process.env.REACT_APP_AVATAR_URL}${user?.avatar}`}
+          src={
+            user?.avatar
+              ? `${process.env.REACT_APP_AVATAR_URL}${user?.avatar}`
+              : null
+          }
           alt={user?.name}
-        />
+        >
+          {user?.name.charAt(0)}
+        </Avatar>
       }
       content={
         <Editor

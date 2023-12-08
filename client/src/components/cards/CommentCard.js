@@ -10,9 +10,15 @@ const CommentCard = ({ comment }) => {
       author={comment?.name}
       avatar={
         <Avatar
-          src={`${process.env.REACT_APP_AVATAR_URL}${comment?.avatar}`}
+          src={
+            comment?.avatar
+              ? `${process.env.REACT_APP_AVATAR_URL}${comment?.avatar}`
+              : null
+          }
           alt={comment?.name}
-        />
+        >
+          {comment?.name.charAt(0)}
+        </Avatar>
       }
       content={comment?.title}
       datetime={
