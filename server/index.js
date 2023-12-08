@@ -9,7 +9,6 @@ const { auth, user, post, health } = require("./src/routes");
 const startServer = () => {
   const currentEnv = loadEnv();
   const port = process.env.PORT || 5000;
-  const hostname = process.env.HOSTNAME || "127.0.0.1";
   const app = express();
 
   app.use(cors());
@@ -24,11 +23,10 @@ const startServer = () => {
 
   app.use(errorHandler);
 
-  app.listen(port, hostname, async () => {
+  app.listen(port, async () => {
     warn(`Current environment: ${currentEnv}`);
     await db();
-    log(`Server running at http://${hostname}:${port}`);
-    log(`Check server health at http://${hostname}:${port}/api/health`);
+    log(`Server is up and running`);
   });
 };
 
