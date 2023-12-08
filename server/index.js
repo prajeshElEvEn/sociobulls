@@ -13,7 +13,7 @@ const startServer = () => {
 
   app.use(
     cors({
-      origin: [process.env.CLIENT_URL],
+      origin: ["https://sociobulls.vercel.app"],
       methods: ["POST", "GET", "PUT", "DELETE"],
       credentials: true,
     })
