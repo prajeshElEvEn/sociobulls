@@ -11,12 +11,12 @@ const startServer = () => {
   const port = process.env.PORT || 5000;
   const app = express();
 
-  const allowedOrigins = process.env.ALLOWED_HOSTS?.split(", ") || [
-    `http://127.0.0.1:${port}`,
-  ];
+  // const allowedOrigins = process.env.ALLOWED_HOSTS?.split(", ") || [
+  //   `http://127.0.0.1:${port}`,
+  // ];
 
   const options = {
-    origin: allowedOrigins,
+    origin: ["https://sociobulls.vercel.app"],
   };
 
   app.use(cors(options));
