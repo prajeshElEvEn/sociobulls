@@ -1,6 +1,6 @@
 import { PageContainer, ProCard } from "@ant-design/pro-components";
-import { Button, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button } from "antd";
+import React, { useEffect } from "react";
 import { Loading, ProfileCard, ProfileForm } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../features/users/userSlice";

@@ -1,8 +1,6 @@
 import { ProCard, PageContainer } from "@ant-design/pro-components";
-import React, { useEffect } from "react";
+import React from "react";
 import { PostTable } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserPosts } from "../../features/post/postSlice";
 
 const Posts = () => {
   return (
