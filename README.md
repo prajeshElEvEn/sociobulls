@@ -38,30 +38,6 @@ cd sociobulls
 
 > Make sure you're inside the `/sociobulls` directory
 
-- Create `.env.development` inside `./server` and put in the content as:
-
-```env
-NODE_ENV=development
-PORT=<port>
-HOSTNAME=<ip_address>
-MONGO_URI=<mongo_connection_uri>
-SECRET=<any_secret_key>
-EXPIRY=<expiry_duration>
-```
-
-> You can refer to `./server/.env.example`
-
-- Create `.env.development` inside `./client` and put in the content as:
-
-```env
-REACT_APP_SERVER_PORT=<same_as_server_port>
-REACT_APP_SERVER_HOSTNAME=<same_as_server_hostname>
-REACT_APP_API_URL=http://${REACT_APP_SERVER_HOSTNAME}:${REACT_APP_SERVER_PORT}/api
-REACT_APP_AVATAR_URL=http://${REACT_APP_SERVER_HOSTNAME}:${REACT_APP_SERVER_PORT}/uploads/avatars/
-```
-
-> You can refer to `./client/.env.example`
-
 - Open two terminals
   - Terminal 1 for `server`
   ```bash
