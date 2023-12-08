@@ -10,8 +10,8 @@ Social Media for AlgoBulls
 
 ## Pre-requisites
 
-- [Node.js]() | Uses [v20.9.0]()
-- [npm]() - Node Package Manager | Uses [v10.1.0]()
+- [Node.js](https://nodejs.org/en) | Uses `v20.9.0`
+- [npm](https://www.npmjs.com/) - Node Package Manager | Uses `v10.1.0`
 
 ## Installation
 
@@ -36,11 +36,11 @@ cd sociobulls
 
 ## Usage
 
-> Make sure you're inside the `./sociobulls` directory
+> Make sure you're inside the `/sociobulls` directory
 
-- Create `.env.development` inside `./sociobulls/server` and put in the content as:
+- Create `.env.development` inside `./server` and put in the content as:
 
-```.env
+```env
 NODE_ENV=development
 PORT=<port>
 HOSTNAME=<ip_address>
@@ -49,18 +49,18 @@ SECRET=<any_secret_key>
 EXPIRY=<expiry_duration>
 ```
 
-> You can refer to ./sociobulls/server/.env.example
+> You can refer to `./server/.env.example`
 
-- Create `.env.development` inside `./sociobulls/client` and put in the content as:
+- Create `.env.development` inside `./client` and put in the content as:
 
-```.env
+```env
 REACT_APP_SERVER_PORT=<same_as_server_port>
 REACT_APP_SERVER_HOSTNAME=<same_as_server_hostname>
 REACT_APP_API_URL=http://${REACT_APP_SERVER_HOSTNAME}:${REACT_APP_SERVER_PORT}/api
 REACT_APP_AVATAR_URL=http://${REACT_APP_SERVER_HOSTNAME}:${REACT_APP_SERVER_PORT}/uploads/avatars/
 ```
 
-> You can refer to ./sociobulls/client/.env.example
+> You can refer to `./client/.env.example`
 
 - Open two terminals
   - Terminal 1 for `server`
@@ -75,3 +75,13 @@ REACT_APP_AVATAR_URL=http://${REACT_APP_SERVER_HOSTNAME}:${REACT_APP_SERVER_PORT
   ```
 
 ## Resources
+
+- [React Js](https://react.dev/)
+- [Ant Design](https://ant.design/)
+- [Ant Design Pro](https://pro.ant.design/)
+- [Ant Design Pro Components](https://procomponents.ant.design/en-US)
+- [Ant Design Icons]()
+- [Redux Toolkit]()
+- [Axios]()
+- [Express Js]()
+- [Multer]()
