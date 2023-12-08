@@ -11,7 +11,13 @@ const startServer = () => {
   const port = process.env.PORT || 5000;
   const app = express();
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: [process.env.CLIENT_URL],
+      methods: ["POST", "GET", "PUT", "DELETE"],
+      credentials: true,
+    })
+  );
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use("/uploads", express.static(constants.paths.uploadDir));
