@@ -1,23 +1,23 @@
-import { Button, Form, Upload } from "antd";
 import React, { useRef } from "react";
+import { Button, Form, Upload } from "antd";
 import { ModalForm, ProFormText } from "@ant-design/pro-components";
 import { UploadOutlined } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../features/users/userSlice";
 
-const normFile = (e) => {
+const normFile = (e: any) => {
   if (Array.isArray(e)) {
     return e;
   }
   return e?.file.originFileObj;
 };
 
-const ProfileForm = () => {
+const ProfileForm: React.FC = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.auth);
-  const formRef = useRef();
+  const { id } = useSelector((state: RootState) => state.auth);
+  const formRef = useRef<any>(); // Change 'any' to the specific type if possible
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: any) => {
     dispatch(updateUser({ id: id, ...values }));
     formRef.current?.resetFields();
     return true;

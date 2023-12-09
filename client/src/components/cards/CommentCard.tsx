@@ -1,19 +1,27 @@
-import { Comment } from "@ant-design/compatible";
+import { Comment as AntComment } from "@ant-design/compatible";
 import React from "react";
-import { Avatar } from "antd";
-import { Tooltip } from "antd";
+import { Avatar, Tooltip } from "antd";
 import moment from "moment";
 
-const CommentCard = ({ comment }) => {
+interface CommentCardProps {
+  comment: {
+    name: string;
+    avatar?: string;
+    title: string;
+    createdAt: string; // Assuming createdAt is of type string, update accordingly
+  };
+}
+
+const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
   return (
-    <Comment
+    <AntComment
       author={comment?.name}
       avatar={
         <Avatar
           src={
             comment?.avatar
               ? `${process.env.REACT_APP_AVATAR_URL}${comment?.avatar}`
-              : null
+              : undefined
           }
           alt={comment?.name}
         >

@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { Button, Space } from "antd";
-import { LockOutlined, MailOutlined, UserOutlined } from "../../assets/icons";
-import { Link, useNavigate } from "react-router-dom";
 import { LoginForm, ProFormText } from "@ant-design/pro-components";
+import { Button, Space } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { LockOutlined, MailOutlined } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../features/auth/authSlice";
+import { login } from "../../features/auth/authSlice";
 import { BrandLogo } from "../../assets/images";
 
-const SignUp = () => {
+const SignIn: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status } = useSelector((state) => state.auth);
+  const { status } = useSelector((state: RootState) => state.auth);
 
-  const handleSubmit = (values) => {
-    dispatch(register(values));
+  const handleSubmit = (values: any) => {
+    dispatch(login(values));
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const SignUp = () => {
       logo={BrandLogo}
       actions={
         <Space>
-          Already have an account? <Link to="/auth">Sign In</Link>
+          Don't have an account? <Link to="/auth/signup">Sign Up</Link>
         </Space>
       }
       onFinish={handleSubmit}
@@ -41,27 +41,13 @@ const SignUp = () => {
               key="submit"
               onClick={() => props.form?.submit?.()}
             >
-              Sign Up
+              Sign In
             </Button>,
             ...doms,
           ];
         },
       }}
     >
-      <ProFormText
-        name="name"
-        fieldProps={{
-          size: "large",
-          prefix: <UserOutlined className={"prefixIcon"} />,
-        }}
-        placeholder={"John Doe"}
-        rules={[
-          {
-            required: true,
-            message: "Name is required!",
-          },
-        ]}
-      />
       <ProFormText
         name="email"
         fieldProps={{
@@ -76,7 +62,6 @@ const SignUp = () => {
           },
         ]}
       />
-
       <ProFormText.Password
         name="password"
         fieldProps={{
@@ -91,32 +76,8 @@ const SignUp = () => {
           },
         ]}
       />
-      <ProFormText.Password
-        name="confirm"
-        fieldProps={{
-          size: "large",
-          prefix: <LockOutlined className={"prefixIcon"} />,
-        }}
-        placeholder={"password"}
-        rules={[
-          {
-            required: true,
-            message: "Password is required!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error("The new password that you entered do not match!")
-              );
-            },
-          }),
-        ]}
-      />
     </LoginForm>
   );
 };
 
-export default SignUp;
+export default SignIn;

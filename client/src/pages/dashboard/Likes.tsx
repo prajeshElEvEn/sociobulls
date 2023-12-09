@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
-import { PageContainer, ProCard } from "@ant-design/pro-components";
+import { ProCard, PageContainer } from "@ant-design/pro-components";
 import { Loading, PostCard } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserBookmarkedPosts } from "../../features/post/postSlice";
+import { getUserLikedPosts } from "../../features/post/postSlice";
 import { Empty } from "antd";
 
-const Bookmarks = () => {
+const Likes: React.FC = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.auth);
-  const { posts, postIsLoading } = useSelector((state) => state.post);
+  const { id } = useSelector((state: RootState) => state.auth);
+  const { posts, postIsLoading } = useSelector(
+    (state: RootState) => state.post
+  );
 
   useEffect(() => {
-    dispatch(getUserBookmarkedPosts({ id: id }));
+    dispatch(getUserLikedPosts({ id: id }));
   }, [dispatch, id]);
+
   return (
     <PageContainer>
       <ProCard
@@ -23,7 +26,7 @@ const Bookmarks = () => {
         {postIsLoading ? (
           <Loading />
         ) : posts.length > 0 ? (
-          posts.map((post) => <PostCard post={post} />)
+          posts.map((post) => <PostCard key={post._id} post={post} />)
         ) : (
           <Empty />
         )}
@@ -32,4 +35,4 @@ const Bookmarks = () => {
   );
 };
 
-export default Bookmarks;
+export default Likes;

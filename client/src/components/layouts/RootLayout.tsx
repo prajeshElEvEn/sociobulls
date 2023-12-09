@@ -6,11 +6,12 @@ import { ProLayout } from "@ant-design/pro-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../features/users/userSlice";
 import { BrandLogo } from "../../assets/images";
+import { RootState } from "../../app/store"; // Adjust the import path based on your project structure
 
-const RootLayout = () => {
+const RootLayout: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id, status } = useSelector((state) => state.auth);
+  const { id, status } = useSelector((state: RootState) => state.auth);
 
   const [pathname, setPathname] = useState("/");
 

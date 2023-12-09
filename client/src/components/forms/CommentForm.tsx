@@ -1,11 +1,38 @@
 import React, { useState } from "react";
 import { Avatar, Form, Button, Input } from "antd";
-import { Comment } from "@ant-design/compatible";
+import { Comment as AntComment } from "@ant-design/compatible";
 import { useDispatch } from "react-redux";
 import { updatePost } from "../../features/post/postSlice";
+
 const { TextArea } = Input;
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+interface CommentFormProps {
+  id: string;
+  user: {
+    avatar?: string;
+    name: string;
+  };
+  post: {
+    _id: string;
+  };
+}
+
+interface FormData {
+  id: string;
+  comment: {
+    id: string;
+    name: string;
+    avatar?: string;
+    title: string;
+  };
+}
+
+const Editor: React.FC<{
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+  onSubmit: () => void;
+  submitting: boolean;
+  value: string;
+}> = ({ onChange, onSubmit, submitting, value }) => (
   <div>
     <Form.Item>
       <TextArea rows={4} onChange={onChange} value={value} />
@@ -23,15 +50,15 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </div>
 );
 
-const CommentForm = ({ id, user, post }) => {
+const CommentForm: React.FC<CommentFormProps> = ({ id, user, post }) => {
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    id: post?._id,
+  const [formData, setFormData] = useState<FormData>({
+    id: post?._id || "",
     comment: {
       id: id,
-      name: user?.name,
-      avatar: user?.avatar,
+      name: user?.name || "",
+      avatar: user?.avatar || "",
       title: "",
     },
   });
@@ -45,13 +72,13 @@ const CommentForm = ({ id, user, post }) => {
   };
 
   return (
-    <Comment
+    <AntComment
       avatar={
         <Avatar
           src={
             user?.avatar
               ? `${process.env.REACT_APP_AVATAR_URL}${user?.avatar}`
-              : null
+              : undefined
           }
           alt={user?.name}
         >

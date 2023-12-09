@@ -1,7 +1,7 @@
 import React from "react";
 import { Spin } from "antd";
 
-const Loading = () => {
+const Loading: React.FC = () => {
   return <Spin fullscreen />;
 };
 

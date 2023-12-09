@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../features/users/userSlice";
 import { logout } from "../../features/auth/authSlice";
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const dispatch = useDispatch();
   const { status, id } = useSelector((state) => state.auth);
   const { user, userIsLoading } = useSelector((state) => state.user);
@@ -24,8 +24,8 @@ const Profile = () => {
   return (
     <PageContainer
       extra={[
-        <ProfileForm />,
-        <Button type="primary" onClick={handleSubmit}>
+        <ProfileForm key="profile-form" />,
+        <Button key="logout" type="primary" onClick={handleSubmit}>
           Logout
         </Button>,
       ]}

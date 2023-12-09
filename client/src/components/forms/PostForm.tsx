@@ -1,16 +1,16 @@
+import React, { useRef } from "react";
 import { ModalForm, ProFormTextArea } from "@ant-design/pro-components";
 import { Button } from "antd";
-import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, getPosts } from "../../features/post/postSlice";
 
-const PostForm = () => {
+const PostForm: React.FC = () => {
   const dispatch = useDispatch();
-  const formRef = useRef();
+  const formRef = useRef<any>(); // Change 'any' to the specific type if possible
 
-  const { id } = useSelector((state) => state.auth);
+  const { id } = useSelector((state: RootState) => state.auth);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: any) => {
     await dispatch(createPost({ userId: id, ...values }));
     await dispatch(getPosts());
     formRef.current?.resetFields();

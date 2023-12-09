@@ -1,7 +1,7 @@
-import { EditableProTable } from "@ant-design/pro-components";
-import { Form } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { EditableProTable } from "@ant-design/pro-components";
+import { Form } from "antd";
 import {
   deletePost,
   getUserPosts,
@@ -9,29 +9,30 @@ import {
 } from "../../features/post/postSlice";
 import Loading from "../utils/Loading";
 
-const PostTable = () => {
+const PostTable: React.FC = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.auth);
-  const { posts, postIsLoading } = useSelector((state) => state.post);
+  const { id } = useSelector((state: any) => state.auth);
+  const { posts, postIsLoading } = useSelector((state: any) => state.post);
 
-  const actionRef = useRef();
-  const [editableKeys, setEditableRowKeys] = useState([]);
-  const [dataSource, setDataSource] = useState([]);
+  const actionRef = useRef<any>();
+  const [editableKeys, setEditableRowKeys] = useState<string[]>([]);
+  const [dataSource, setDataSource] = useState<any[]>([]);
   const [form] = Form.useForm();
 
   useEffect(() => {
     dispatch(getUserPosts({ id: id }));
   }, [dispatch, id]);
 
-  const handleEditPost = (action, id) => {
+  const handleEditPost = (action: any, id: string) => {
     action?.startEditable?.(id);
   };
-  const handleDeletePost = (id) => {
+
+  const handleDeletePost = (id: string) => {
     dispatch(deletePost({ id: id }));
     setDataSource(dataSource.filter((item) => item.id !== id));
   };
 
-  const handleSubmit = async (values, id) => {
+  const handleSubmit = async (values: any, id: string) => {
     await dispatch(updatePost({ id: id, title: values.title }));
     setEditableRowKeys([]);
   };
@@ -53,7 +54,7 @@ const PostTable = () => {
     {
       title: "Likes",
       dataIndex: "likes",
-      render: (text, record) => {
+      render: (text: any, record: any) => {
         const likesCount = record.likes ? record.likes.length : 0;
         return <span>{likesCount}</span>;
       },
@@ -62,7 +63,7 @@ const PostTable = () => {
     {
       title: "Bookmarks",
       dataIndex: "bookmarks",
-      render: (text, record) => {
+      render: (text: any, record: any) => {
         const bookmarksCount = record.bookmarks ? record.bookmarks.length : 0;
         return <span>{bookmarksCount}</span>;
       },
@@ -71,7 +72,7 @@ const PostTable = () => {
     {
       title: "Comments",
       dataIndex: "comments",
-      render: (text, record) => {
+      render: (text: any, record: any) => {
         const commentsCount = record.comments ? record.comments.length : 0;
         return <span>{commentsCount}</span>;
       },
@@ -93,7 +94,7 @@ const PostTable = () => {
       title: "Action",
       valueType: "option",
       width: 250,
-      render: (text, record, _, action) => [
+      render: (text: any, record: any, _: any, action: any) => [
         <a
           key="editable"
           onClick={() => {
@@ -127,13 +128,13 @@ const PostTable = () => {
     {
       title: "Author",
       dataIndex: "author",
-      render: (text, record) => {
+      render: (text: any, record: any) => {
         return <span>{record?.name}</span>;
       },
     },
   ];
 
-  const expandedRowRender = (record) => {
+  const expandedRowRender = (record: any) => {
     return (
       <EditableProTable
         rowKey="_id"
@@ -178,11 +179,14 @@ const PostTable = () => {
         editable={{
           form,
           editableKeys,
-          onSave: async (key, row) => {
+          onSave: async (key: string, row: any) => {
             handleSubmit(row, key);
           },
           onChange: setEditableRowKeys,
-          actionRender: (row, config, dom) => [dom.save, dom.cancel],
+          actionRender: (row: any, config: any, dom: any) => [
+            dom.save,
+            dom.cancel,
+          ],
         }}
         pagination={{
           showQuickJumper: true,

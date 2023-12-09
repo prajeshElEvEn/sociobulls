@@ -7,7 +7,23 @@ import {
   UserOutlined,
 } from "../../assets/icons";
 
-const menuItems = {
+interface RouteItem {
+  path: string;
+  name: string;
+  icon: JSX.Element;
+}
+
+interface MenuItems {
+  route: {
+    path: string;
+    routes: RouteItem[];
+  };
+  location: {
+    pathname: string;
+  };
+}
+
+const menuItems: MenuItems = {
   route: {
     path: "/",
     routes: [

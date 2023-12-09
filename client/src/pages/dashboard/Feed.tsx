@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../features/post/postSlice";
 import { Empty } from "antd";
 
-const Feed = () => {
+const Feed: React.FC = () => {
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.auth);
-  const { posts, postIsLoading } = useSelector((state) => state.post);
+  const { status } = useSelector((state: RootState) => state.auth);
+  const { posts, postIsLoading } = useSelector(
+    (state: RootState) => state.post
+  );
 
   useEffect(() => {
     if (status) {
@@ -17,7 +19,7 @@ const Feed = () => {
   }, [dispatch, status]);
 
   return (
-    <PageContainer extra={[<PostForm />]}>
+    <PageContainer extra={[<PostForm key="postForm" />]}>
       <ProCard
         gutter={[16, 16]}
         colSpan={{ xs: 24, sm: 12, md: 12, lg: 12, xl: 12 }}

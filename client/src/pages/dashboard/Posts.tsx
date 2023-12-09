@@ -2,7 +2,7 @@ import { ProCard, PageContainer } from "@ant-design/pro-components";
 import React from "react";
 import { PostTable } from "../../components";
 
-const Posts = () => {
+const Posts: React.FC = () => {
   return (
     <PageContainer>
       <ProCard

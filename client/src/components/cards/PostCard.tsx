@@ -7,21 +7,43 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../../features/post/postSlice";
 
-const PostCard = ({ post }) => {
+interface LikeBookmark {
+  id: string;
+  like: {
+    id: string;
+  };
+}
+
+interface PostCardProps {
+  post: {
+    _id: string;
+    likes: { id: string }[];
+    bookmarks: { id: string }[];
+    comments: { id: string }[];
+    author: {
+      name: string;
+      avatar?: string;
+    };
+    title: string;
+    createdAt: string;
+  };
+}
+
+const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
 
-  const [like, setLike] = useState({
+  const [like, setLike] = useState<LikeBookmark>({
     id: "",
     like: {
       id: "",
     },
   });
 
-  const [bookmark, setBookmark] = useState({
+  const [bookmark, setBookmark] = useState<LikeBookmark>({
     id: "",
-    bookmark: {
+    like: {
       id: "",
     },
   });
@@ -39,7 +61,7 @@ const PostCard = ({ post }) => {
   useEffect(() => {
     setBookmark({
       id: post?._id,
-      bookmark: {
+      like: {
         id: id,
       },
     });
@@ -120,7 +142,7 @@ const PostCard = ({ post }) => {
             src={
               post?.author.avatar
                 ? `${process.env.REACT_APP_AVATAR_URL}${post?.author.avatar}`
-                : null
+                : undefined
             }
             alt={post?.author.name}
           >
