@@ -1,3 +1,0 @@
-# SocioBulls
-
-> Server Side
