@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Typography } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined } from "./ui/icons";
 
 const { Title } = Typography;
 
