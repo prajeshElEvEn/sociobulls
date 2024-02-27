@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
+// console.log(token);
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,

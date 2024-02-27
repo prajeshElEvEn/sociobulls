@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const loadEnv = require("../env");
 loadEnv();
-
 const { SECRET, EXPIRY } = process.env;
 
 const generateToken = (id) => {
